@@ -1,0 +1,17 @@
+- Choose a commonly used protocol that the client can use to communicate with the API (such as http or GraphQL)
+
+- Implement the API (.NET Core). We recommend using an application framework.
+
+- The data used by the service is attached in the movies-compact.json file.
+
+- Please implement data persistence or storage
+
+Use cases for the service:
+
+1. List all movies (you can show relevant information about movies in the listing)
+2. Search for movies that match the client's search term
+3. Adding a new movie and its information to the database
+
+- Take in to account that your application might be developed further by some other developer.
+
+- Implement at least 1 unit test for feature of your choice.
