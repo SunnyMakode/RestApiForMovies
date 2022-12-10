@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace RestApiForMovies.DataPersistance.DataService
 {
@@ -21,16 +22,9 @@ namespace RestApiForMovies.DataPersistance.DataService
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<IQueryable<TEntity>> GetAll(params string[] includeExpressions)
+        public async Task<IQueryable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate)
         {
-            IQueryable<TEntity> set = this._context.Set<TEntity>();
-
-            foreach (var includeQuery in includeExpressions)
-            {
-                set = set.Include(includeQuery);
-            }
-
-            return set;
+            return this._context.Set<TEntity>().Where(predicate);
         }
 
         public void Add(TEntity entity)

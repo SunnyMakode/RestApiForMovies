@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestApiForMovies.DataPersistance;
 using RestApiForMovies.DataPersistance.DataService;
+using System.Linq.Expressions;
 
 namespace RestApiForMovies.UnitTest
 {
@@ -23,18 +24,6 @@ namespace RestApiForMovies.UnitTest
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<IQueryable<TEntity>> GetAll(params string[] includeExpressions)
-        {
-            IQueryable<TEntity> set = this._context.Set<TEntity>();
-
-            foreach (var includeQuery in includeExpressions)
-            {
-                set = set.Include(includeQuery);
-            }
-
-            return set;
-        }
-
         public void Add(TEntity entity)
         {
             this._context.Set<TEntity>().Add(entity);
@@ -42,12 +31,17 @@ namespace RestApiForMovies.UnitTest
 
         public void Remove(TEntity entity)
         {
-            this._context.Set<TEntity>().Remove(entity);
+            throw new NotImplementedException();
         }
 
         public void Update(TEntity entity)
         {
-            this._context.Entry<TEntity>(entity).State = EntityState.Modified;
+            throw new NotImplementedException();
+        }
+
+        public Task<IQueryable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

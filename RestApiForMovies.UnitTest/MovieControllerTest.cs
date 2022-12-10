@@ -62,6 +62,16 @@ namespace RestApiForMovies.UnitTest
             Assert.That(result, Is.TypeOf<Movie>());
         }
 
+        //public async Task CallingGetMovies_WithSearchFilters_FromMovieController_ExpectingFilteredResult()
+        //{
+        //    //Act
+        //    var result = await _controller.GetMovies().ConfigureAwait(false);
+
+        //    //Assert
+        //    Assert.That(result?.Name, Is.Not.Empty);
+        //    Assert.That(result, Is.TypeOf<Movie>());
+        //}
+
         private void SeedTestData()
         {
             var dataFile = @"ProjectDocument/movies-compact.json";

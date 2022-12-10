@@ -4,6 +4,7 @@ using RestApiForMovies.DataPersistance;
 using RestApiForMovies.DataPersistance.DataService;
 using RestApiForMovies.DataTransferObjects;
 using RestApiForMovies.Entities;
+using System.Linq.Expressions;
 
 namespace RestApiForMovies.Controllers
 {
@@ -39,8 +40,8 @@ namespace RestApiForMovies.Controllers
                     Synopsis = movieItem.Synopsis,
                     Genres = GetGenreFromDomainObject(movieItem.MovieGenres),
                     Actors = GetActorFromDomainObject(movieItem.MovieActors),
-                    Director = new DirectorDto 
-                    { 
+                    Director = new DirectorDto
+                    {
                         FirstName = movieItem.Director.FirstName,
                         LastName = movieItem.Director.LastName
                     }
@@ -48,7 +49,44 @@ namespace RestApiForMovies.Controllers
             }
 
             return movieDtos;
-        }        
+        }
+
+        // GET: api/Movies
+        [HttpGet("query")]
+        public async Task<IEnumerable<MovieDto>> GetFilteredMovies([FromQuery] QueryFilter queryFilter)
+        {
+            var movies = await _movieService.GetAll(CreateQuery(queryFilter));
+
+            List<MovieDto> movieDtos = new List<MovieDto>();
+            foreach (var movieItem in movies)
+            {
+                movieDtos.Add(new MovieDto
+                {
+                    Id = movieItem.Id,
+                    Name = movieItem.Name,
+                    Year = movieItem.Year,
+                    AgeLimit = movieItem.AgeLimit,
+                    Rating = movieItem.Rating,
+                    Synopsis = movieItem.Synopsis,
+                    Genres = GetGenreFromDomainObject(movieItem.MovieGenres),
+                    Actors = GetActorFromDomainObject(movieItem.MovieActors),
+                    Director = new DirectorDto
+                    {
+                        FirstName = movieItem.Director.FirstName,
+                        LastName = movieItem.Director.LastName
+                    }
+                });
+            }
+
+            return movieDtos;
+        }
+
+        private static Expression<Func<Movie, bool>> CreateQuery(QueryFilter queryFilter)
+        {
+            return x => x.Name == queryFilter.MovieName
+                     || x.Director.FirstName == queryFilter.Director.FirstName
+                     || x.AgeLimit == queryFilter.AgeLimit;
+        }
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
@@ -115,7 +153,7 @@ namespace RestApiForMovies.Controllers
             };
 
             this._movieService.Add(movie);
-            //_context.Movies.Add(movie);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetMovie", new { id = movie.Id }, movie);

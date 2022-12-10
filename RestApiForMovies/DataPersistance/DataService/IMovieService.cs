@@ -7,6 +7,7 @@ namespace RestApiForMovies.DataPersistance.DataService
     public interface IMovieService<TEntity> where TEntity : class
     {
         Task<IEnumerable<TEntity>> GetAll();
+        Task<IQueryable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicates);
         Task<TEntity> Get(int id);
         void Add(TEntity entity);
         void Remove(TEntity entity);
