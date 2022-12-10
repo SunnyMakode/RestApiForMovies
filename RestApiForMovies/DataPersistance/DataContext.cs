@@ -17,10 +17,10 @@ namespace RestApiForMovies.DataPersistance
         public DbSet<Movie_Genre> MovieGenres { get; set; }
         public DbSet<Movie_Actor> MovieActors { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.EnableSensitiveDataLogging();
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.EnableSensitiveDataLogging();
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

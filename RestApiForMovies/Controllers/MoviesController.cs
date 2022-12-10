@@ -22,7 +22,7 @@ namespace RestApiForMovies.Controllers
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetMovies()
+        public async Task<IEnumerable<MovieDto>> GetMovies()
         {
             var movies = await _movieService.GetAll();
 
@@ -74,7 +74,6 @@ namespace RestApiForMovies.Controllers
             }
 
             _movieService.Update(movie);
-            //_context.Entry(movie).State = EntityState.Modified;
 
             try
             {
