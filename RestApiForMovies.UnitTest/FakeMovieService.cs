@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace RestApiForMovies.UnitTest
 {
-    public class FakeMovieService<TEntity> : IMovieService<TEntity> where TEntity : class
+    public class FakeMovieService<TEntity> : IDataService<TEntity> where TEntity : class
     {
         private readonly DataContext _context;
 

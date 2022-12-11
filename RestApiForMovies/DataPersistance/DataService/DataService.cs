@@ -3,11 +3,11 @@ using System.Linq.Expressions;
 
 namespace RestApiForMovies.DataPersistance.DataService
 {
-    public class MovieService<TEntity> : IMovieService<TEntity> where TEntity : class
+    public class DataService<TEntity> : IDataService<TEntity> where TEntity : class
     {
         private readonly DataContext _context;
 
-        public MovieService(DataContext context)
+        public DataService(DataContext context)
         {
             this._context = context;
         }

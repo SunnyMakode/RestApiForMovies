@@ -18,7 +18,7 @@ namespace RestApiForMovies.UnitTest
             .Options;
 
         DataContext testDbContext;
-        IMovieService<Movie> _service;
+        IDataService<Movie> _service;
         MoviesController _controller;
 
         [OneTimeSetUp]

@@ -21,9 +21,8 @@ namespace RestApiForMovies
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //builder.Services.AddTransient(typeof(IMovieService<>), typeof(MovieService<>));
-            builder.Services.AddScoped(typeof(IMovieService<>), typeof(MovieService<>));
-            
+            builder.Services.AddScoped(typeof(IDataService<>), typeof(DataService<>));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
