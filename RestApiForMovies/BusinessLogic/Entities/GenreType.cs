@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace RestApiForMovies.Entities
+namespace RestApiForMovies.BusinessLogic.Entities
 {
     public class GenreType
     {

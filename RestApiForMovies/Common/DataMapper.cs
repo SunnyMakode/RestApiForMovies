@@ -1,5 +1,5 @@
-﻿using RestApiForMovies.DataTransferObjects;
-using RestApiForMovies.Entities;
+﻿using RestApiForMovies.BusinessLogic.DataTransferObjects;
+using RestApiForMovies.BusinessLogic.Entities;
 
 namespace RestApiForMovies.Common
 {

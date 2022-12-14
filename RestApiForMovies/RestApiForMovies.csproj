@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\WeatherForecastController.cs" />
-    <Compile Remove="Entities\Movie_Director.cs" />
+    <Compile Remove="BusinessLogic\Entities\Movie_Director.cs" />
   </ItemGroup>
 
   <ItemGroup>

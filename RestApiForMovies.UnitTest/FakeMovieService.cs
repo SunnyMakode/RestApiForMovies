@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestApiForMovies.BusinessLogic.ServiceInterface;
 using RestApiForMovies.DataPersistance;
-using RestApiForMovies.DataPersistance.DataService;
 using System.Linq.Expressions;
 
 namespace RestApiForMovies.UnitTest

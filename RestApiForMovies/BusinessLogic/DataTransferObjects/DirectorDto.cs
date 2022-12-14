@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RestApiForMovies.DataTransferObjects
+namespace RestApiForMovies.BusinessLogic.DataTransferObjects
 {
-    public class ActorDto
+    public class DirectorDto
     {
         [JsonIgnore]
         public int Id { get; set; }

@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RestApiForMovies.Entities;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-namespace RestApiForMovies.DataPersistance.DataService
+namespace RestApiForMovies.BusinessLogic.ServiceInterface
 {
     public interface IDataService<TEntity> where TEntity : class
     {

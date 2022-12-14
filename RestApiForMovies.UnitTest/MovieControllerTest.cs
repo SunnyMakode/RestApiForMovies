@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using RestApiForMovies.BusinessLogic.DataTransferObjects;
+using RestApiForMovies.BusinessLogic.Entities;
+using RestApiForMovies.BusinessLogic.ServiceInterface;
+using RestApiForMovies.Common;
 using RestApiForMovies.Controllers;
 using RestApiForMovies.DataPersistance;
-using RestApiForMovies.DataPersistance.DataService;
-using RestApiForMovies.DataTransferObjects;
-using RestApiForMovies.Entities;
 
 namespace RestApiForMovies.UnitTest
 {
@@ -24,6 +25,7 @@ namespace RestApiForMovies.UnitTest
         [OneTimeSetUp]
         public void Setup()
         {
+            //Arrange
             testDbContext = new DataContext(testDbContextOptions);
             testDbContext.Database.EnsureCreated();
             SeedTestData();
@@ -62,15 +64,19 @@ namespace RestApiForMovies.UnitTest
             Assert.That(result, Is.TypeOf<Movie>());
         }
 
-        //public async Task CallingGetMovies_WithSearchFilters_FromMovieController_ExpectingFilteredResult()
-        //{
-        //    //Act
-        //    var result = await _controller.GetMovies().ConfigureAwait(false);
-
-        //    //Assert
-        //    Assert.That(result?.Name, Is.Not.Empty);
-        //    Assert.That(result, Is.TypeOf<Movie>());
-        //}
+        [Test]
+        public async Task CallingGetFilteredMovies_WithFakeInterface_ExpectingNotImplementedException()
+        {
+            try
+            {
+                var query = new QueryFilter { MovieName = "Avengers: End Game" };
+                var result = await _controller.GetFilteredMovies(query).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Assert.That(e.Message, Is.EqualTo("The method or operation is not implemented."));
+            }
+        }
 
         private void SeedTestData()
         {
@@ -85,59 +91,11 @@ namespace RestApiForMovies.UnitTest
 
             foreach (var movieItem in testMovieDtoData)
             {
-                testMovieData.Add(new Movie
-                {
-                    Name = movieItem.Name,
-                    Year = movieItem.Year,
-                    MovieGenres = GetGenreFromDataTranferObject(movieItem.Genres),
-                    MovieActors = GetActorFromDataTransferObject(movieItem.Actors),
-
-                    Director = new Director
-                    {
-                        FirstName = movieItem.Director.FirstName,
-                        LastName = movieItem.Director.LastName,
-                    },
-                    Rating = movieItem.Rating,
-                    AgeLimit = movieItem.AgeLimit,
-                    Synopsis = movieItem.Synopsis
-                });
+                testMovieData.Add(DataMapper.MappingDtoToMovie(movieItem));
             }
 
             testDbContext.Movies.AddRange(testMovieData);
             testDbContext.SaveChanges();
-        }
-
-        private ICollection<Movie_Actor> GetActorFromDataTransferObject(List<ActorDto> actors)
-        {
-            var actorList = new List<Movie_Actor>();
-
-            foreach (var actor in actors)
-            {
-                actorList.Add(new Movie_Actor
-                {
-                    Actor = new Actor
-                    {
-                        FirstName = actor.FirstName,
-                        LastName = actor.LastName,
-                    }
-                });
-            }
-            return actorList;
-        }
-
-        private ICollection<Movie_Genre> GetGenreFromDataTranferObject(List<string> genres)
-        {
-
-            var genreList = new List<Movie_Genre>();
-
-            foreach (var genreName in genres)
-            {
-                genreList.Add(new Movie_Genre
-                {
-                    Genre = new GenreType { Name = genreName }
-                });
-            }
-            return genreList;
         }        
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace RestApiForMovies.Entities
+namespace RestApiForMovies.BusinessLogic.Entities
 {
     public class Director
     {
@@ -9,7 +9,7 @@ namespace RestApiForMovies.Entities
         public int DirectorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        [JsonIgnore]        
+        [JsonIgnore]
         public int MovieId { get; set; }
         [JsonIgnore]
         public Movie Movies { get; set; }

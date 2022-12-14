@@ -1,7 +1,6 @@
-﻿using RestApiForMovies.Entities;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace RestApiForMovies.DataTransferObjects
+namespace RestApiForMovies.BusinessLogic.DataTransferObjects
 {
     public class MovieDto
     {
@@ -9,7 +8,7 @@ namespace RestApiForMovies.DataTransferObjects
         public int Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
-        public List<string> Genres { get; set; } 
+        public List<string> Genres { get; set; }
         public byte AgeLimit { get; set; }
         public byte Rating { get; set; }
         public List<ActorDto> Actors { get; set; }

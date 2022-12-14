@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestApiForMovies.BusinessLogic.DataTransferObjects;
+using RestApiForMovies.BusinessLogic.Entities;
+using RestApiForMovies.BusinessLogic.ServiceInterface;
 using RestApiForMovies.Common;
 using RestApiForMovies.DataPersistance;
-using RestApiForMovies.DataPersistance.DataService;
-using RestApiForMovies.DataTransferObjects;
-using RestApiForMovies.Entities;
 using System.Linq.Expressions;
 
 namespace RestApiForMovies.Controllers

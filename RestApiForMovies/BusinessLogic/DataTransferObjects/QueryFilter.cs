@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 
-namespace RestApiForMovies.DataTransferObjects
+namespace RestApiForMovies.BusinessLogic.DataTransferObjects
 {
     public class QueryFilter
     {
