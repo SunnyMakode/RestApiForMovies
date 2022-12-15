@@ -46,13 +46,14 @@ namespace RestApiForMovies.Controllers
         public async Task<ActionResult<MovieDto>> GetMovie(int id)
         {
             var movie = await _movieService.Get(id);
-            var movieDtos = DataMapper.MappingMovieToDto(new List<Movie> { movie });
 
-            if (movieDtos.FirstOrDefault() == null)
+            if (movie == null)
             {
                 return NotFound();
             }
 
+            var movieDtos = DataMapper.MappingMovieToDto(new List<Movie> { movie });
+            
             return movieDtos.FirstOrDefault();
         }
 
