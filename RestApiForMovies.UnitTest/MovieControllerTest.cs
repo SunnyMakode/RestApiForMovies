@@ -57,11 +57,11 @@ namespace RestApiForMovies.UnitTest
         public async Task CallingGetMovie_WithId_FromMovieController_ExpectingToReturnSpecificMovie(int id)
         {
             //Act
-            var result = ((ActionResult<Movie>)await _controller.GetMovie(id).ConfigureAwait(false)).Value;
+            var result = ((ActionResult<MovieDto>)await _controller.GetMovie(id).ConfigureAwait(false)).Value;
 
             //Assert
             Assert.That(result?.Name, Is.Not.Empty);
-            Assert.That(result, Is.TypeOf<Movie>());
+            Assert.That(result, Is.TypeOf<MovieDto>());
         }
 
         [Test]

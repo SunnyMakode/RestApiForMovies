@@ -20,7 +20,7 @@ namespace RestApiForMovies.Controllers
                                 DataContext context)
         {
             this._movieService = movieService;
-            _context = context;
+            this._context = context;
         }
 
         // GET: api/Movies
@@ -43,16 +43,17 @@ namespace RestApiForMovies.Controllers
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movie>> GetMovie(int id)
+        public async Task<ActionResult<MovieDto>> GetMovie(int id)
         {
             var movie = await _movieService.Get(id);
+            var movieDtos = DataMapper.MappingMovieToDto(new List<Movie> { movie });
 
-            if (movie == null)
+            if (movieDtos.FirstOrDefault() == null)
             {
                 return NotFound();
             }
 
-            return movie;
+            return movieDtos.FirstOrDefault();
         }
 
         // PUT: api/Movies/5
